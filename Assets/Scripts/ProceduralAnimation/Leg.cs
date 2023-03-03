@@ -14,14 +14,14 @@ public class Leg : MonoBehaviour
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private AnimationCurve heightCurve;
 
-    private float tipMaxHeight = 0.2f;
-    private float tipAnimationTime = 0.15f;
-    private float tipAnimationFrameTime = 1 / 60.0f;
+    public float tipMaxHeight = 0.2f;
+    public float tipAnimationTime = 0.15f;
+    public float tipAnimationFrameTime = 1 / 60.0f;
 
-    private float ikOffset = 1.0f;
-    private float tipMoveDist = 0.55f;
-    private float maxRayDist = 7.0f;
-    private float tipPassOver = 0.55f / 2.0f;
+    public float ikOffset = 1.0f;
+    public float tipMoveDist = 0.55f;
+    public float maxRayDist = 7.0f;
+    public float tipPassOver = 0.55f / 2.0f;
 
     public Vector3 TipPos { get; private set; }
     public Vector3 TipUpDir { get; private set; }
@@ -36,8 +36,8 @@ public class Leg : MonoBehaviour
     {
         legController = GetComponentInParent<LegController>();
 
-        transform.parent = bodyTransform;
-        rayOrigin.parent = bodyTransform;
+        //transform.parent = bodyTransform;
+        //rayOrigin.parent = bodyTransform;
         TipPos = ikTarget.transform.position;
     }
 

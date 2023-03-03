@@ -7,20 +7,20 @@ public class LegController : MonoBehaviour
     [SerializeField] private Transform bodyTransform;
     [SerializeField] private Leg[] legs;
 
-    private float maxTipWait = 0.7f;
+    public float maxTipWait = 0.7f;
 
-    private bool readySwitchOrder = false;
-    private bool stepOrder = true;
-    private float bodyHeightBase = 1.3f;
+    public bool readySwitchOrder = false;
+    public bool stepOrder = true;
+    public float bodyHeightBase = 1.3f;
 
-    private Vector3 bodyPos;
-    private Vector3 bodyUp;
-    private Vector3 bodyForward;
-    private Vector3 bodyRight;
-    private Quaternion bodyRotation;
+    public Vector3 bodyPos;
+    public Vector3 bodyUp;
+    public Vector3 bodyForward;
+    public Vector3 bodyRight;
+    public Quaternion bodyRotation;
 
-    private float PosAdjustRatio = 0.1f;
-    private float RotAdjustRatio = 0.2f;
+    public float PosAdjustRatio = 0.1f;
+    public float RotAdjustRatio = 0.2f;
 
     private void Start()
     {

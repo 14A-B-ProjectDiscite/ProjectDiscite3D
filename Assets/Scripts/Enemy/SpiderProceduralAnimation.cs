@@ -69,7 +69,17 @@ public class SpiderProceduralAnimation : MonoBehaviour
         Vector3[] result = new Vector3[2];
         RaycastHit[] hits;
         hits = Physics.RaycastAll(origin, dir, 20);
-        for (int i = hits.Length - 1; i >= 0; i--)
+        /*for (int i = hits.Length - 1; i >= 0; i--)
+        {
+            RaycastHit hit = hits[i];
+            if ((groundLayer & 1 << hit.collider.gameObject.layer) == 1 << hit.collider.gameObject.layer)
+            {
+                result[0] = hit.point;
+                result[1] = hit.normal;
+                return result;
+            }
+        }*/
+        for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
             if ((groundLayer & 1 << hit.collider.gameObject.layer) == 1 << hit.collider.gameObject.layer)

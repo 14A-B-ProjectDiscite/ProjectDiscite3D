@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 89349968900129481}
   m_LocalRotation: {x: 0, y: 0.9399252, z: 0, w: 0.3413805}
   m_LocalPosition: {x: 1, y: -12.41, z: 5.09}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 89349968900107819}
@@ -79,10 +79,10 @@ MonoBehaviour:
   m_Friction: 6
   m_Gravity: 20
   m_JumpForce: 8
-  m_AutoBunnyHop: 0
+  m_AutoBunnyHop: 1
   m_AirControl: 0.3
   m_GroundSettings:
-    MaxSpeed: 20
+    MaxSpeed: 5
     Acceleration: 14
     Deceleration: 10
   m_AirSettings:
@@ -163,7 +163,7 @@ Camera:
   m_GameObject: {fileID: 89349968900129483}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19166474, g: 0.30196637, b: 0.4745098, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -177,9 +177,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 75
+  field of view: 90
   orthographic: 0
   orthographic size: 100
   m_Depth: 0
@@ -190,7 +190,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
