@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3354,7 +3354,7 @@ MonoBehaviour:
   wallRunJump: 300
   wallRunJumpUpMulti: 0.6
   wallRunMovementMulti: 0.7
-  blockDoubleWallrun: 0
+  blockDoubleWallrun: 1
   checkType: 0
   grounded: 0
   groundCheckRadius: 0.1
@@ -3676,7 +3676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &89349968772931340
 AudioListener:
   m_ObjectHideFlags: 0
