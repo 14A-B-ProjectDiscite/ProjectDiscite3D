@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 namespace Unity.FPS.Game
 {
@@ -35,4 +35,4 @@ namespace Unity.FPS.Game
             }
         }
     }
-}
+}*/

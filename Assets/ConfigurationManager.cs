@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,11 +8,8 @@ public class ConfigurationManager : MonoBehaviour
 {
     void Start()
     {
-        // A correct website page.
-        StartCoroutine(GetRequest("http://localhost:5241/api/Configuration"));
-
-        // A non-existing page.
-        StartCoroutine(GetRequest("https://error.html"));
+        DontDestroyOnLoad(this);
+        StartCoroutine(GetRequest("https://nagyilles.jedlik.cloud/api/api/configuration"));
     }
 
     IEnumerator GetRequest(string uri)
@@ -35,6 +33,8 @@ public class ConfigurationManager : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    Configuration conf =  JsonUtility.FromJson<Configuration>(webRequest.downloadHandler.text);
+                    Debug.Log(JsonUtility.ToJson(conf));
                     break;
             }
         }

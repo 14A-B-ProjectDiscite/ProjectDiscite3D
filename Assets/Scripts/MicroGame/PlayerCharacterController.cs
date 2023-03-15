@@ -1,4 +1,4 @@
-﻿using Unity.FPS.Game;
+﻿/*using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -474,4 +474,4 @@ namespace Unity.FPS.Gameplay
             return true;
         }
     }
-}
+}*/
