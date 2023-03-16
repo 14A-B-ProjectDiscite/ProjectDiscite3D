@@ -11,6 +11,9 @@ public class Login : MonoBehaviour
     //[SerializeField] TextMeshProUGUI email;
     [SerializeField] InputField email;
     [SerializeField] InputField password;
+    [SerializeField] StringVariable token;
+    [SerializeField] IntVariable userID;
+    [SerializeField] SaveDataSource dataSource;
 
    public void LoginButtonClicked()
     {
@@ -47,6 +50,10 @@ public class Login : MonoBehaviour
         else
         {
             Debug.Log("Received: " + req.downloadHandler.text);
+            TokenData data = JsonUtility.FromJson<TokenData>(req.downloadHandler.text);
+            token.Value = data.token;
+            userID.Value = data.id;
+            dataSource.Load();
         }
 
     }
@@ -56,4 +63,10 @@ public class UserData
 {
     public string email;
     public string password;
+}
+[Serializable]
+public class TokenData
+{
+    public string token;
+    public int id;
 }
