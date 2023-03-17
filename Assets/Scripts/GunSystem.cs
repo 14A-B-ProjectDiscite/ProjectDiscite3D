@@ -50,6 +50,10 @@ public class GunSystem : MonoBehaviour
             bulletsShot = bulletsPerTap;
             Shoot();
         }
+        else if(readyToShoot && shooting && !reloading && bulletsLeft <= 0)
+        {
+            Reload();
+        }
     }
     private void Shoot()
     {
@@ -75,8 +79,10 @@ public class GunSystem : MonoBehaviour
         //camShake.Shake(camShakeDuration, camShakeMagnitude);
         CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, camShakeFadeIn, camShakeFadeOut );
         //Graphics
-        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, rayHit.normal);
+        Instantiate(bulletHoleGraphic, rayHit.point, rotation/* Quaternion.Euler(0, 180, 0)*/);
+        GameObject go = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        go.transform.parent = attackPoint;
 
         bulletsLeft--;
         bulletsShot--;
