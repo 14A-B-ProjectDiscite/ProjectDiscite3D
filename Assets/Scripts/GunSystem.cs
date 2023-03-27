@@ -67,8 +67,9 @@ public class GunSystem : MonoBehaviour
         {
             Debug.Log(rayHit.collider.name);
 
-            if (rayHit.collider.CompareTag("Enemy"))
-                rayHit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(damage);
+            IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
+            if (damageable != null)
+                damageable.OnTakeDamage(damage);
         }
 
         //ShakeCamera
