@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GunSystem : MonoBehaviour
 {
@@ -10,6 +10,12 @@ public class GunSystem : MonoBehaviour
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
+    //recoil
+    public Transform recoilMod;
+    public GameObject weapon;
+    public float maxRecoil_x = -20f;
+    public float recoilSpeed = 10f;
+    private float recoil = 0f;
     //bools 
     bool shooting, readyToShoot, reloading;
 
@@ -19,11 +25,12 @@ public class GunSystem : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
 
+
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
     //public CamShake camShake;
     public float camShakeMagnitude, camShakeFadeIn, camShakeFadeOut, camShakeRoughness;
-    public TextMeshProUGUI text;
+    public Text text;
 
     private void Awake()
     {
@@ -35,8 +42,29 @@ public class GunSystem : MonoBehaviour
         MyInput();
 
         //SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        text.text = bulletsLeft + " / " + magazineSize;
     }
+
+    void Recoiling()
+    {
+        if (recoil > 0)
+        {
+            Quaternion maxRecoil = Quaternion.Euler(maxRecoil_x, 0f, 0f);
+            // Dampen towards the target rotation
+            recoilMod.rotation = Quaternion.Slerp(recoilMod.rotation, maxRecoil, Time.deltaTime * recoilSpeed);
+            weapon.transform.localEulerAngles = new Vector3(recoilMod.localEulerAngles.x, weapon.transform.localEulerAngles.y, weapon.transform.localEulerAngles.z);
+            recoil -= Time.deltaTime;
+        }
+        else
+        {
+            recoil = 0;
+            Quaternion minRecoil = Quaternion.Euler(0f, 0f, 0f);
+            // Dampen towards the target rotation
+            recoilMod.rotation = Quaternion.Slerp(recoilMod.rotation, minRecoil, Time.deltaTime * recoilSpeed / 2f);
+            weapon.transform.localEulerAngles = new Vector3(recoilMod.localEulerAngles.x, weapon.transform.localEulerAngles.y, weapon.transform.localEulerAngles.z);
+        }
+    }
+
     private void MyInput()
     {
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
