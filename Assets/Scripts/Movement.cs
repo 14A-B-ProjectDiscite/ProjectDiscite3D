@@ -135,13 +135,13 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         Look();
-
+        GroundCheck();
         //Input
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
         jump = Input.GetKey(KeyCode.Space);
 
-        GroundCheck();
+        
     }
 
     private void FixedUpdate()
@@ -214,14 +214,7 @@ public class Movement : MonoBehaviour
             c = Physics.RaycastNonAlloc(groundCheck.position, -transform.up, groundHits, groundCheckRadius,
                 groundLayer, QueryTriggerInteraction.Ignore);
         }
-        if (c>0)
-        {
-            if (isJumping)
-            {
-                isJumping = false;  
-                CameraController.Instance.HeadBop();
-            }
-        }
+
 
         if (c > 0 && readyToJump)
         {
@@ -233,6 +226,12 @@ public class Movement : MonoBehaviour
         {
             grounded = false;
             groundNormal = Vector3.zero;
+        }
+
+        if (isJumping && grounded)
+        {
+            isJumping = false;
+            CameraController.Instance.HeadBop();
         }
     }
 
