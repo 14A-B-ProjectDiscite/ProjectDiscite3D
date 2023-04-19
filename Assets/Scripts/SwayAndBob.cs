@@ -27,8 +27,8 @@ public class SwayAndBob : MonoBehaviour
     float curveSin { get => Mathf.Sin(speedCurve); }
     float curveCos { get => Mathf.Cos(speedCurve); }
 
-    public Vector3 travelLimit = Vector3.one * 0.025f;
-    public Vector3 bobLimit = Vector3.one * 0.01f;
+    public Vector3 travelLimit = Vector3.one * 0.025f *3;
+    public Vector3 bobLimit = Vector3.one * 0.01f * 3;
     Vector3 bobPosition;
 
     public float bobExaggeration;
@@ -49,7 +49,7 @@ public class SwayAndBob : MonoBehaviour
         GetInput();
 
         Sway();
-        SwayRotation();
+         SwayRotation();
         BobOffset();
         BobRotation();
 
@@ -99,8 +99,8 @@ public class SwayAndBob : MonoBehaviour
         speedCurve += Time.deltaTime * (isGrounded.Value ? (Input.GetAxis("Horizontal") + Input.GetAxis("Vertical")) * bobExaggeration : 1f) + 0.01f;
 
         bobPosition.x = (curveCos * bobLimit.x * (isGrounded.Value ? 1 : 0)) - (walkInput.x * travelLimit.x);
-        bobPosition.y = (curveSin * bobLimit.y) - (Input.GetAxis("Vertical") * travelLimit.y);
-        bobPosition.z = -(walkInput.y * travelLimit.z);
+        //bobPosition.y = (curveSin * bobLimit.y) - (Input.GetAxis("Vertical") * travelLimit.y);
+        bobPosition.z = (curveSin * bobLimit.x) - -(walkInput.y * travelLimit.y); ;
     }
 
     void BobRotation()

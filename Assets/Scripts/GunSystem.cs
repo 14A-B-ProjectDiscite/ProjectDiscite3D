@@ -1,8 +1,15 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+public interface IHittable
+{
+    public void Hit(Vector3 hitPoint, Vector3 normal);
+}
+
 public class GunSystem : MonoBehaviour
 {
+    [Header("Gun stats")]
     //Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
@@ -10,28 +17,39 @@ public class GunSystem : MonoBehaviour
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
-    //recoil
+    [Header("Recoil")]
+    //Recoil
     public Transform recoilMod;
     public GameObject weapon;
     public float maxRecoil_x = -20f;
     public float recoilSpeed = 10f;
+    public float recoilRecoverySmoothing;   
     private float recoil = 0f;
+
+
+    private Quaternion defRecoilModRot;
+    private Quaternion defWeaponRot;
     //bools 
     bool shooting, readyToShoot, reloading;
 
     //Reference
+    [Header("Reference")]
     public Camera fpsCam;
     public Transform attackPoint;
     public RaycastHit rayHit;
-    public LayerMask whatIsEnemy;
+    public LayerMask whatIsHittable;
 
 
     //Graphics
+    [Header("Graphics")]
     public GameObject muzzleFlash, bulletHoleGraphic;
-    //public CamShake camShake;
     public float camShakeMagnitude, camShakeFadeIn, camShakeFadeOut, camShakeRoughness;
     public Text text;
-
+    private void Start()
+    {
+        defRecoilModRot = recoilMod.rotation;
+        defWeaponRot = weapon.transform.rotation;
+    }
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -39,15 +57,23 @@ public class GunSystem : MonoBehaviour
     }
     private void Update()
     {
+        RecoverRecoil();
         MyInput();
 
         //SetText
         text.text = bulletsLeft + " / " + magazineSize;
-    }
 
-    void Recoiling()
+
+    }
+    void RecoverRecoil()
     {
-        if (recoil > 0)
+        recoilMod.localRotation =  Quaternion.Lerp(recoilMod.localRotation, Quaternion.identity, Time.deltaTime * recoilRecoverySmoothing);
+        weapon.transform.localRotation = Quaternion.Lerp(weapon.transform.localRotation, Quaternion.identity, Time.deltaTime * recoilRecoverySmoothing);
+
+    }
+    void RecoilOnce()
+    {
+       if (recoil > 0)
         {
             Quaternion maxRecoil = Quaternion.Euler(maxRecoil_x, 0f, 0f);
             // Dampen towards the target rotation
@@ -88,28 +114,30 @@ public class GunSystem : MonoBehaviour
         float y = Random.Range(-spread, spread);
 
         //Calculate Direction with Spread
-        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
+        Vector3 direction = weapon.transform.forward + new Vector3(x, y, 0);
 
         //RayCast
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsHittable))
         {
             Debug.Log(rayHit.collider.name);
-
+            IHittable hittable = rayHit.collider.transform.root.GetComponent<IHittable>();
+            if (hittable != null)
+                hittable.Hit(rayHit.point, rayHit.normal);
             IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
             if (damageable != null)
                 damageable.OnTakeDamage(damage);
         }
 
         //ShakeCamera
-        //camShake.Shake(camShakeDuration, camShakeMagnitude);
         CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, camShakeFadeIn, camShakeFadeOut );
         //Graphics
-        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+        Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, rayHit.normal);
+        Instantiate(bulletHoleGraphic, rayHit.point, spawnRotation);
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
         bulletsLeft--;
         bulletsShot--;
-
+        RecoilOnce();
         Invoke("ResetShot", timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)

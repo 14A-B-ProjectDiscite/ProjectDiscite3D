@@ -41,6 +41,7 @@ public class Movement : MonoBehaviour
     public float jumpForce = 1300f;
 
     private bool readyToJump;
+    private bool isJumping;
 
     [Header("Wallrunning")]
 
@@ -213,6 +214,14 @@ public class Movement : MonoBehaviour
             c = Physics.RaycastNonAlloc(groundCheck.position, -transform.up, groundHits, groundCheckRadius,
                 groundLayer, QueryTriggerInteraction.Ignore);
         }
+        if (c>0)
+        {
+            if (isJumping)
+            {
+                isJumping = false;  
+                CameraController.Instance.HeadBop();
+            }
+        }
 
         if (c > 0 && readyToJump)
         {
@@ -229,6 +238,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
+        isJumping = true;
         if (rb.velocity.y < 0)
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
