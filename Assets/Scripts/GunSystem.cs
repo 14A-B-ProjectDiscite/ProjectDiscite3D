@@ -133,7 +133,7 @@ public class GunSystem : MonoBehaviour
         //Graphics
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, rayHit.normal);
         Instantiate(bulletHoleGraphic, rayHit.point, spawnRotation);
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        Instantiate(muzzleFlash, attackPoint.position, attackPoint.rotation, attackPoint);
 
         bulletsLeft--;
         bulletsShot--;
