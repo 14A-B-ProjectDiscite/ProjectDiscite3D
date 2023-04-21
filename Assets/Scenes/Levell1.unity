@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -436,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e64ce14b44fa904ba1dca9152556b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GunType: 0
   damage: 10
   timeBetweenShooting: 0.1
   spread: 0.001
@@ -450,14 +451,15 @@ MonoBehaviour:
   maxRecoil_x: -20
   recoilSpeed: 1
   recoilRecoverySmoothing: 1
+  spreadConfig: {fileID: 11400000, guid: 5ee1d1982634da943bab202fe9b57c68, type: 2}
   fpsCam: {fileID: 275777041}
   attackPoint: {fileID: 1635255449}
   whatIsHittable:
     serializedVersion: 2
     m_Bits: 2147483647
-  muzzleFlash: {fileID: 1587250918974726, guid: bd04617c16f0f3749b94585ed80e6ec7,
+  muzzleFlash: {fileID: 1013222245937190, guid: 0750c6e74aaf98c44a8ea49c64b27e99,
     type: 3}
-  bulletHoleGraphic: {fileID: 919132149155446097, guid: 81d446dfc5fe0714389ae28ffe9e38c1,
+  bulletHoleGraphic: {fileID: 3530181515610060214, guid: fbd6164d830ce7d488bb109ac4f97a94,
     type: 3}
   camShakeMagnitude: 3
   camShakeFadeIn: 0.01
@@ -908,6 +910,7 @@ GameObject:
   - component: {fileID: 1326844921}
   - component: {fileID: 1326844920}
   - component: {fileID: 1326844919}
+  - component: {fileID: 1326844922}
   m_Layer: 3
   m_Name: Terrain
   m_TagString: Ground
@@ -951,7 +954,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 72bc6ef93dd24b24a92daaf12577d9f1, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -975,6 +978,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1326844922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326844918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38149ac62aa9334ebdf727b83efb378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1733525918610913732, guid: 6c66d7ad5bb0e1a40b64763de2ee1288, type: 3}
 --- !u!1 &1479356971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1180,7 @@ GameObject:
   - component: {fileID: 1730845245}
   - component: {fileID: 1730845244}
   - component: {fileID: 1730845243}
+  - component: {fileID: 1730845247}
   m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
@@ -1249,6 +1266,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1730845247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730845242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38149ac62aa9334ebdf727b83efb378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 151012009452463909, guid: 07d74a1ffd8d6ad43ae9b0a05f1d3183, type: 3}
 --- !u!1 &1734974262
 GameObject:
   m_ObjectHideFlags: 0

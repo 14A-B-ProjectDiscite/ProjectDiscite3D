@@ -13,6 +13,13 @@ Shader "PolygonArsenal/PolyIntense" {
         Cull Off Lighting Off ZWrite Off
  
         SubShader{
+            Tags {"RenderPipeline" = "UniversalPipeline" }
+                     Pass {
+                                HLSLPROGRAM
+                                ...
+                                ENDHLSL
+                        }
+
         Pass{
  
         CGPROGRAM

@@ -1,3 +1,4 @@
+using LlamAcademy.Guns;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public interface IHittable
 
 public class GunSystem : MonoBehaviour
 {
+    [Header("Gun Type")]
+    public GunType GunType;
     [Header("Gun stats")]
     //Gun stats
     public int damage;
@@ -25,6 +28,7 @@ public class GunSystem : MonoBehaviour
     public float recoilSpeed = 10f;
     public float recoilRecoverySmoothing;   
     private float recoil = 0f;
+    public SpreadConfig spreadConfig;
 
 
     private Quaternion defRecoilModRot;
@@ -67,28 +71,19 @@ public class GunSystem : MonoBehaviour
     }
     void RecoverRecoil()
     {
-        recoilMod.localRotation =  Quaternion.Lerp(recoilMod.localRotation, Quaternion.identity, Time.deltaTime * recoilRecoverySmoothing);
-        weapon.transform.localRotation = Quaternion.Lerp(weapon.transform.localRotation, Quaternion.identity, Time.deltaTime * recoilRecoverySmoothing);
+        recoilMod.transform.localRotation = Quaternion.Lerp(
+                recoilMod.transform.localRotation,
+                Quaternion.Euler(Quaternion.identity.eulerAngles),
+                Time.deltaTime * spreadConfig.RecoilRecoverySpeed
+            );
 
     }
     void RecoilOnce()
     {
-       if (recoil > 0)
-        {
-            Quaternion maxRecoil = Quaternion.Euler(maxRecoil_x, 0f, 0f);
-            // Dampen towards the target rotation
-            recoilMod.rotation = Quaternion.Slerp(recoilMod.rotation, maxRecoil, Time.deltaTime * recoilSpeed);
-            weapon.transform.localEulerAngles = new Vector3(recoilMod.localEulerAngles.x, weapon.transform.localEulerAngles.y, weapon.transform.localEulerAngles.z);
-            recoil -= Time.deltaTime;
-        }
-        else
-        {
-            recoil = 0;
-            Quaternion minRecoil = Quaternion.Euler(0f, 0f, 0f);
-            // Dampen towards the target rotation
-            recoilMod.rotation = Quaternion.Slerp(recoilMod.rotation, minRecoil, Time.deltaTime * recoilSpeed / 2f);
-            weapon.transform.localEulerAngles = new Vector3(recoilMod.localEulerAngles.x, weapon.transform.localEulerAngles.y, weapon.transform.localEulerAngles.z);
-        }
+        Vector3 spreadAmount = spreadConfig.GetSpread(10);
+
+        Vector3 shootDirection = Vector3.zero;
+        recoilMod.transform.forward += recoilMod.transform.TransformDirection(spreadAmount);
     }
 
     private void MyInput()
@@ -157,4 +152,11 @@ public class GunSystem : MonoBehaviour
         bulletsLeft = magazineSize;
         reloading = false;
     }
+}
+
+public enum GunType
+{
+    Raycast,
+    Projectile,
+    Beam
 }
