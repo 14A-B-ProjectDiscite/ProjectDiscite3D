@@ -117,7 +117,15 @@ public class GunSystem : MonoBehaviour
             Debug.Log(rayHit.collider.name);
             IHittable hittable = rayHit.collider.transform.root.GetComponent<IHittable>();
             if (hittable != null)
+            {
+                Debug.Log("Ihittable");
                 hittable.Hit(rayHit.point, rayHit.normal);
+            }
+            else
+            {
+                Debug.Log(" Not Ihittable");
+            }
+
             IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
             if (damageable != null)
                 damageable.OnTakeDamage(damage);

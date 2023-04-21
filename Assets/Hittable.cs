@@ -11,15 +11,4 @@ public class Hittable : MonoBehaviour, IHittable
         Instantiate(prefab, hitPoint, spawnRotation);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
