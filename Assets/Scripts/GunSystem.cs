@@ -11,14 +11,16 @@ public interface IHittable
 public class GunSystem : MonoBehaviour
 {
     [Header("Gun Type")]
-    public GunType GunType;
+    public GunType gunType;
     [Header("Gun stats")]
     //Gun stats
+    public GameObject Projectile;
+    public float projectileForce;
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
+    public int bulletsPerTap;
     public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    int bulletsShot;
 
     [Header("Recoil")]
     //Recoil
@@ -56,18 +58,12 @@ public class GunSystem : MonoBehaviour
     }
     private void Awake()
     {
-        bulletsLeft = magazineSize;
         readyToShoot = true;
     }
     private void Update()
     {
         RecoverRecoil();
         MyInput();
-
-        //SetText
-        text.text = bulletsLeft + " / " + magazineSize;
-
-
     }
     void RecoverRecoil()
     {
@@ -91,10 +87,8 @@ public class GunSystem : MonoBehaviour
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-
         //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && shooting && !reloading)
         {
             bulletsShot = bulletsPerTap;
             Shoot();
@@ -110,26 +104,28 @@ public class GunSystem : MonoBehaviour
 
         //Calculate Direction with Spread
         Vector3 direction = weapon.transform.forward + new Vector3(x, y, 0);
-
-        //RayCast
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsHittable))
+        if (gunType == GunType.Raycast)
         {
-            Debug.Log(rayHit.collider.name);
-            IHittable hittable = rayHit.collider.transform.root.GetComponent<IHittable>();
-            if (hittable != null)
+            //RayCast
+            if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsHittable))
             {
-                Debug.Log("Ihittable");
-                hittable.Hit(rayHit.point, rayHit.normal);
-            }
-            else
-            {
-                Debug.Log(" Not Ihittable");
-            }
+                Debug.Log(rayHit.collider.name);
+                IHittable hittable = rayHit.collider.transform.root.GetComponent<IHittable>();
+                if (hittable != null)
+                {
+                    hittable.Hit(rayHit.point, rayHit.normal);
+                }
 
-            IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
-            if (damageable != null)
-                damageable.OnTakeDamage(damage);
+                IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
+                if (damageable != null)
+                    damageable.OnTakeDamage(damage);
+            }
+        } else if(gunType == GunType.Projectile)
+        {
+            GameObject projectileGO = Instantiate(Projectile, attackPoint.position, Quaternion.identity);
+            projectileGO.GetComponent<Rigidbody>().AddForce(attackPoint.forward * -projectileForce);
         }
+
 
         //ShakeCamera
         CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, camShakeFadeIn, camShakeFadeOut );
@@ -137,13 +133,11 @@ public class GunSystem : MonoBehaviour
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, rayHit.normal);
         Instantiate(bulletHoleGraphic, rayHit.point, spawnRotation);
         Instantiate(muzzleFlash, attackPoint.position, attackPoint.rotation, attackPoint);
-
-        bulletsLeft--;
         bulletsShot--;
         RecoilOnce();
         Invoke("ResetShot", timeBetweenShooting);
 
-        if (bulletsShot > 0 && bulletsLeft > 0)
+        if (bulletsShot > 0)
             Invoke("Shoot", timeBetweenShots);
     }
     private void ResetShot()
@@ -157,7 +151,6 @@ public class GunSystem : MonoBehaviour
     }
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
         reloading = false;
     }
 }

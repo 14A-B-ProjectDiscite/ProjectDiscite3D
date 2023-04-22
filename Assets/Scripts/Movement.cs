@@ -6,7 +6,11 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public static Movement Instance;
-
+    [Header("ScriptableObjects")]
+    [SerializeField]
+    Vector3Variable PlayerPos;
+    [SerializeField]
+    BoolVariable IsGrounded;
     [Header("Objects")]
 
     public Transform cam;
@@ -134,6 +138,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        PlayerPos.Value = transform.position;
         Look();
         GroundCheck();
         //Input
@@ -218,12 +223,14 @@ public class Movement : MonoBehaviour
 
         if (c > 0 && readyToJump)
         {
+            IsGrounded.Value = true;
             grounded = true;
             lastWallRunObject = gameObject;
             groundNormal = groundHits[0].normal;
         }
         else
         {
+            IsGrounded.Value = false;
             grounded = false;
             groundNormal = Vector3.zero;
         }

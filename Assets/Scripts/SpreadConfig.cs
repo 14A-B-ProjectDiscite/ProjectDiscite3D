@@ -44,11 +44,17 @@ namespace LlamAcademy.Guns
 
             if (SpreadType == BulletSpreadType.Simple)
             {
+                float xSpread = Random.Range(Spread.x / 2, Spread.x);
+                float chance = Random.Range(0, 2);
+                if (chance == 1)
+                {
+                    xSpread *= -1;
+                }
                 spread = Vector3.Lerp(
                     Vector3.zero,
                     new Vector3(
-                        Random.Range(-Spread.x, Spread.x),
-                        Random.Range(-Spread.y, Spread.y),
+                        xSpread,
+                        Random.Range(Spread.y/2, Spread.y),
                         Random.Range(-Spread.z, Spread.z)
                     ),
                     Mathf.Clamp01(ShootTime / MaxSpreadTime)

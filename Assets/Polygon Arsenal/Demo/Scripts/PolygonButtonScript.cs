@@ -39,7 +39,7 @@ namespace PolygonArsenal
         {
 
             projectileScript = effectScript.projectiles[effectScript.currentProjectile].GetComponent<PolygonProjectileScript>();// Access the currently selected projectile's 'ProjectileScript'
-            projectileParticleName = projectileScript.projectileParticle.name;  // Assign the name of the currently selected projectile to projectileParticleName
+            //projectileParticleName = projectileScript.projectileParticle.name;  // Assign the name of the currently selected projectile to projectileParticleName
         }
 
         public bool overButton()        // This function will return either true or false
