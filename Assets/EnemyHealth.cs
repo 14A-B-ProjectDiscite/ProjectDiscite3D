@@ -43,7 +43,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         anim.SetTrigger("Die");
         Instantiate(DeathEffect, transform.position, Quaternion.identity);
         Destroy(DeathEffect, 3f);
-        Destroy(HealthBar.gameObject);
+        Destroy(HealthBar.gameObject, 3.1f);
         Destroy(gameObject, 3f);
         
     }
