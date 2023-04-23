@@ -43,7 +43,7 @@ public class AgentSpawner : MonoBehaviour
             // Probably you'd use an object pool here
             NavMeshAgent agent = Instantiate(AgentPrefab, ChooseRandomPointOnNavMesh(Triangulation), Quaternion.identity);
             agent.GetComponent<RandomPositionMover>().Triangulation = Triangulation;
-            agent.GetComponent<EnemyScript>().SetupHealthBar(HealthBarCanvas, Camera);
+            agent.GetComponent<EnemyHealth>().SetupHealthBar(HealthBarCanvas, Camera);
 
             yield return Wait;
         }

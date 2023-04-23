@@ -8,17 +8,21 @@ using UnityEngine.UIElements;
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private Vector3Variable cameraPos;
+    Animator anim;
     [SerializeField]
     private float Health = 100;
     [SerializeField]
     private ProgressBar HealthBar;
-    [SerializeField] 
+    public GameObject DeathEffect;
+
+    private NavMeshAgent Agent;
     private float MaxHealth;
 
+    bool dead;
     private void Awake()
     {
         MaxHealth = Health;
+        Agent = GetComponent<NavMeshAgent>();
     }
 
     public void OnTakeDamage(float Damage)
@@ -26,26 +30,31 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Health -= Damage;
         HealthBar.SetProgress(Health / MaxHealth, 3);
 
-        if (Health < 0)
+        if (Health <= 0 && !dead)
         {
             OnDied();
+            Agent.enabled = false;
         }
     }
 
     private void OnDied()
     {
-        Destroy(gameObject, 1f);
-        Destroy(HealthBar.gameObject, 1f);
-    }
-
-    public void SetupHealthBar(Canvas Canvas)
-    {
-        HealthBar.transform.SetParent(Canvas.transform);
+        dead = true;
+        anim.SetTrigger("Die");
+        Instantiate(DeathEffect, transform.position, Quaternion.identity);
+        Destroy(DeathEffect, 3f);
+        Destroy(HealthBar.gameObject);
+        Destroy(gameObject, 3f);
         
     }
-    private void Update()
+
+    public void SetupHealthBar(Canvas Canvas, Camera Camera)
     {
-        HealthBar.transform.LookAt(cameraPos.Value, Vector3.up);
+        HealthBar.transform.SetParent(Canvas.transform);
+        if (HealthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+        {
+            faceCamera.Camera = Camera;
+        }
     }
 }
 
