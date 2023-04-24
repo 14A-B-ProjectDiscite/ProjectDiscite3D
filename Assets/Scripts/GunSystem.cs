@@ -1,4 +1,6 @@
 using LlamAcademy.Guns;
+using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +23,9 @@ public class GunSystem : MonoBehaviour
     public int bulletsPerTap;
     public bool allowButtonHold;
     int bulletsShot;
+    public float BulletSpeed;
+    [SerializeField]
+    private TrailRenderer BulletTrail;
 
     [Header("Recoil")]
     //Recoil
@@ -28,7 +33,7 @@ public class GunSystem : MonoBehaviour
     public GameObject weapon;
     public float maxRecoil_x = -20f;
     public float recoilSpeed = 10f;
-    public float recoilRecoverySmoothing;   
+    public float recoilRecoverySmoothing;
     private float recoil = 0f;
     public SpreadConfig spreadConfig;
 
@@ -119,8 +124,19 @@ public class GunSystem : MonoBehaviour
                 IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
                 if (damageable != null)
                     damageable.OnTakeDamage(damage);
+
+                TrailRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, rayHit.point, rayHit.normal, true));
             }
-        } else if(gunType == GunType.Projectile)
+            else
+            {
+                TrailRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, rayHit.point, rayHit.normal, false));
+            }
+        }
+        else if (gunType == GunType.Projectile)
         {
             GameObject projectileGO = Instantiate(Projectile, attackPoint.position, Quaternion.identity);
             projectileGO.GetComponent<Rigidbody>().AddForce(attackPoint.forward * -projectileForce);
@@ -128,7 +144,7 @@ public class GunSystem : MonoBehaviour
 
 
         //ShakeCamera
-        CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, camShakeFadeIn, camShakeFadeOut );
+        CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, camShakeFadeIn, camShakeFadeOut);
         //Graphics
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, rayHit.normal);
         Instantiate(bulletHoleGraphic, rayHit.point, spawnRotation);
@@ -153,6 +169,39 @@ public class GunSystem : MonoBehaviour
     {
         reloading = false;
     }
+
+    private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
+    {
+        // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
+        // moving slowly when hitting something close, and not
+        Vector3 startPosition = Trail.transform.position;
+        Vector3 desination = HitPoint;
+        if (!MadeImpact)
+        {
+            desination = attackPoint.position + attackPoint.forward * -100;
+        }
+        float distance = Vector3.Distance(Trail.transform.position, desination);
+        
+        float remainingDistance = distance;
+
+        while (remainingDistance > 0)
+        {
+            Trail.transform.position = Vector3.Lerp(startPosition, desination, 1 - (remainingDistance / distance));
+
+            remainingDistance -= BulletSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+        //Animator.SetBool("IsShooting", false);
+        Trail.transform.position = desination;
+        /*if (MadeImpact)
+        {
+            Instantiate(ImpactParticleSystem, HitPoint, Quaternion.LookRotation(HitNormal));
+        }*/
+
+        Destroy(Trail.gameObject, Trail.time);
+    }
+
 }
 
 public enum GunType

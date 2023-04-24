@@ -83,6 +83,9 @@ MonoBehaviour:
   HealthBar: {fileID: 6700905919600824148}
   DeathEffect: {fileID: 6160751335568118249, guid: b0599c0d4c6dbf444b6180fa1666d53b,
     type: 3}
+  experienceOrbCount: 1
+  ExperienceOrb: {fileID: 451450056353825271, guid: 02519859486d7c24c94a3d697575fc2c,
+    type: 3}
 --- !u!195 &-931166867541089839
 NavMeshAgent:
   m_ObjectHideFlags: 0

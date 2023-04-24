@@ -10,6 +10,10 @@ public class Movement : MonoBehaviour
     [SerializeField]
     Vector3Variable PlayerPos;
     [SerializeField]
+    Vector3Variable PlayerRBPos;
+    [SerializeField]
+    Vector3Variable PlayerRBVelocity;
+    [SerializeField]
     BoolVariable IsGrounded;
     [Header("Objects")]
 
@@ -139,6 +143,8 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         PlayerPos.Value = transform.position;
+        PlayerRBPos.Value = rb.position;
+        PlayerRBVelocity.Value = rb.velocity;
         Look();
         GroundCheck();
         //Input

@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private ProgressBar HealthBar;
     public GameObject DeathEffect;
+    public float experienceOrbCount;
+    public GameObject ExperienceOrb; 
 
     private NavMeshAgent Agent;
     private float MaxHealth;
@@ -40,6 +42,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnDied()
     {
         dead = true;
+        for (int i = 0; i < experienceOrbCount; i++)
+        {
+            float speed = Random.Range(5, 15);
+            GameObject go = Instantiate(ExperienceOrb, transform.position, Quaternion.identity);
+            go.GetComponent<HomingMissile>()._speed = speed;
+        }
+
         anim.SetTrigger("Die");
         Instantiate(DeathEffect, transform.position, Quaternion.identity);
         Destroy(DeathEffect, 3f);
