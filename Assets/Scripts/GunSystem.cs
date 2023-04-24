@@ -25,7 +25,7 @@ public class GunSystem : MonoBehaviour
     int bulletsShot;
     public float BulletSpeed;
     [SerializeField]
-    private TrailRenderer BulletTrail;
+    private LineRenderer BulletTrail;
 
     [Header("Recoil")]
     //Recoil
@@ -125,20 +125,22 @@ public class GunSystem : MonoBehaviour
                 if (damageable != null)
                     damageable.OnTakeDamage(damage);
 
-                TrailRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity);
-
-                StartCoroutine(SpawnTrail(trail, rayHit.point, rayHit.normal, true));
+                LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, attackPoint.rotation, attackPoint);
+                float dist = Vector3.Distance(attackPoint.position, rayHit.point);
+                trail.SetPosition(1, new Vector3(0,0, dist));
+                Destroy(trail, 0.05f);
             }
             else
             {
-                TrailRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity);
-
-                StartCoroutine(SpawnTrail(trail, rayHit.point, rayHit.normal, false));
+                LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity, attackPoint);
+                trail.SetPosition(0, attackPoint.position);
+                trail.SetPosition(1, attackPoint.position + attackPoint.forward * -100);
+                Destroy(trail, 1);
             }
         }
         else if (gunType == GunType.Projectile)
         {
-            GameObject projectileGO = Instantiate(Projectile, attackPoint.position, Quaternion.identity);
+            GameObject projectileGO = Instantiate(Projectile, attackPoint.position, attackPoint.rotation);
             projectileGO.GetComponent<Rigidbody>().AddForce(attackPoint.forward * -projectileForce);
         }
 
@@ -168,38 +170,6 @@ public class GunSystem : MonoBehaviour
     private void ReloadFinished()
     {
         reloading = false;
-    }
-
-    private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
-    {
-        // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
-        // moving slowly when hitting something close, and not
-        Vector3 startPosition = Trail.transform.position;
-        Vector3 desination = HitPoint;
-        if (!MadeImpact)
-        {
-            desination = attackPoint.position + attackPoint.forward * -100;
-        }
-        float distance = Vector3.Distance(Trail.transform.position, desination);
-        
-        float remainingDistance = distance;
-
-        while (remainingDistance > 0)
-        {
-            Trail.transform.position = Vector3.Lerp(startPosition, desination, 1 - (remainingDistance / distance));
-
-            remainingDistance -= BulletSpeed * Time.deltaTime;
-
-            yield return null;
-        }
-        //Animator.SetBool("IsShooting", false);
-        Trail.transform.position = desination;
-        /*if (MadeImpact)
-        {
-            Instantiate(ImpactParticleSystem, HitPoint, Quaternion.LookRotation(HitNormal));
-        }*/
-
-        Destroy(Trail.gameObject, Trail.time);
     }
 
 }

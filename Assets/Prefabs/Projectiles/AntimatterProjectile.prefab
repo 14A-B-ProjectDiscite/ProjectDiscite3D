@@ -29504,7 +29504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactParticle: {fileID: 1767842681629282, guid: ae14b44785a276b4ca60cab0d2cb2561,
     type: 3}
-  damage: 10
+  damage: 40
 --- !u!54 &6758288516692853264
 Rigidbody:
   m_ObjectHideFlags: 0
