@@ -48,25 +48,4 @@ public class AgentSpawner : MonoBehaviour
             yield return Wait;
         }
     }
-
-    #region For Demo Only
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 10, 100, 33), "Reset"))
-        {
-            StopAllCoroutines();
-            NavMeshAgent[] agents = GameObject.FindObjectsOfType<NavMeshAgent>();
-            foreach (NavMeshAgent agent in agents)
-            {
-                DestroyImmediate(agent);
-            }
-            foreach (Transform child in HealthBarCanvas.transform)
-            {
-                DestroyImmediate(child.gameObject);
-            }
-
-            Start();
-        }
-    }
-    #endregion
 }

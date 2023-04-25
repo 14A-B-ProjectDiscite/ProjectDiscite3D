@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 652633043664450913}
   - component: {fileID: 652633043673799329}
   - component: {fileID: 652633043429761245}
-  - component: {fileID: -931166867541089839}
-  - component: {fileID: -6233576226454917054}
-  m_Layer: 0
+  - component: {fileID: 5051822260526696064}
+  - component: {fileID: -7970659017051996835}
+  m_Layer: 11
   m_Name: BatEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,29 +86,23 @@ MonoBehaviour:
   experienceOrbCount: 1
   ExperienceOrb: {fileID: 451450056353825271, guid: 02519859486d7c24c94a3d697575fc2c,
     type: 3}
---- !u!195 &-931166867541089839
-NavMeshAgent:
+--- !u!54 &5051822260526696064
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652633043664283905}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 3.5
-  m_Acceleration: 2
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0.8
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &-6233576226454917054
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-7970659017051996835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,9 +111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 652633043664283905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bb3e2fa4ee2c03449d08cbd02302635, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d62a552d4a37be4190947ea54054699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPos: {fileID: 11400000, guid: 4701122a0d38cc04283a79a9c1eb7d75, type: 2}
 --- !u!1 &652633043664284001
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450889}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450891}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450881}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450885}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450887}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450893}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm3Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450895}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm2Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450897}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigRArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450899}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigMainGizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450901}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +454,7 @@ Transform:
   m_GameObject: {fileID: 652633043664284021}
   m_LocalRotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
   m_LocalPosition: {x: 3.536016e-14, y: 0.9964349, z: -0.00000009930805}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 652633043664450887}
@@ -476,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450903}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm3Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450905}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm2Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450907}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RigLArm1Gizmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652633043664450909}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +597,7 @@ GameObject:
   - component: {fileID: 652633043664450911}
   - component: {fileID: 652633043669492833}
   - component: {fileID: 7999786621592433358}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: One Eyed Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +690,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.23
+  m_Radius: 0.55
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6800064152103214844
 PrefabInstance:
@@ -709,10 +704,20 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 652633043664450913}
+    - target: {fileID: 6635763309696038839, guid: 8068f12b839eded409b31bc0810d1b1d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8911293488180746164, guid: 8068f12b839eded409b31bc0810d1b1d,
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911293488180746164, guid: 8068f12b839eded409b31bc0810d1b1d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9115353949260193932, guid: 8068f12b839eded409b31bc0810d1b1d,
         type: 3}

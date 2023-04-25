@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f42b61db69f9a47956a04fab0b7ddd, type: 3}
+  m_Name: SimpleSpreadHuge
+  m_EditorClassIdentifier: 
+  SpreadType: 1
+  RecoilRecoverySpeed: 3
+  MaxSpreadTime: 1
+  Spread: {x: 0.1, y: 0.4, z: 0}
+  SpreadMultiplier: 0.1
+  SpreadTexture: {fileID: 2800000, guid: f39fad4575d57cf41811fe5383d81c04, type: 3}

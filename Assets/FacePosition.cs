@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProceduralAnimation : MonoBehaviour
+public class FacePosition : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    Vector3Variable Pos;
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.LookAt(Pos.Value, Vector3.up);
     }
 }

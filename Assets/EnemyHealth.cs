@@ -29,6 +29,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void OnTakeDamage(float Damage)
     {
+        anim.SetTrigger("Take Damage");
+        /*anim.SetTrigger("Spell Cast");
+        anim.SetTrigger("Spit Poison Attack");
+        anim.SetTrigger("Take Damage");*/
         Health -= Damage;
         HealthBar.SetProgress(Health / MaxHealth, 3);
 
@@ -53,7 +57,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Instantiate(DeathEffect, transform.position, Quaternion.identity);
         Destroy(DeathEffect, 3f);
         Destroy(HealthBar.gameObject, 3.1f);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 4f);
         
     }
 

@@ -16,7 +16,7 @@ public class PlayerChaser : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(MoveAgent());
+        //StartCoroutine(MoveAgent());
     }
 
     private IEnumerator MoveAgent()

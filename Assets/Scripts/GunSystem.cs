@@ -125,17 +125,17 @@ public class GunSystem : MonoBehaviour
                 if (damageable != null)
                     damageable.OnTakeDamage(damage);
 
-                LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, attackPoint.rotation, attackPoint);
-                float dist = Vector3.Distance(attackPoint.position, rayHit.point);
-                trail.SetPosition(1, new Vector3(0,0, dist));
-                Destroy(trail, 0.05f);
+                //LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, attackPoint.rotation, attackPoint);
+                //float dist = Vector3.Distance(attackPoint.position, rayHit.point);
+                //trail.SetPosition(1, new Vector3(0,0, dist));
+                //Destroy(trail, 0.05f);
             }
             else
             {
-                LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity, attackPoint);
-                trail.SetPosition(0, attackPoint.position);
-                trail.SetPosition(1, attackPoint.position + attackPoint.forward * -100);
-                Destroy(trail, 1);
+                //LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity, attackPoint);
+                //trail.SetPosition(0, attackPoint.position);
+                //trail.SetPosition(1, attackPoint.position + attackPoint.forward * -100);
+                //Destroy(trail, 1);
             }
         }
         else if (gunType == GunType.Projectile)
