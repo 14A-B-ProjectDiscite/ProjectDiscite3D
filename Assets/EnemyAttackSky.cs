@@ -17,7 +17,8 @@ public class EnemyAttackSky : MonoBehaviour
 
     private void Start()
     {
-        nextAttack = Time.time + attackSpeed * 2;
+        float r = Random.Range(attackSpeed / 2, attackSpeed * 1.5f);
+        nextAttack = Time.time + r * 2;
     }
     // Update is called once per frame
     void Update()
@@ -26,7 +27,8 @@ public class EnemyAttackSky : MonoBehaviour
         {
             GameObject go = Instantiate(AttackChargeEffect, chargeTransform.position, Quaternion.identity, chargeTransform);
             Destroy(go, chargeTime);
-            nextAttack = Time.time + attackSpeed;
+            float r = Random.Range(attackSpeed/2, attackSpeed*1.5f);
+            nextAttack = Time.time + r;
             attackPos = PlayerPos.Value;
             anim.SetTrigger(attackAnimName);
             StartCoroutine(Launch());
@@ -34,7 +36,7 @@ public class EnemyAttackSky : MonoBehaviour
     }
     IEnumerator Launch() { 
         yield return new WaitForSeconds(chargeTime);
-        Instantiate(attack, PlayerPos.Value, Quaternion.identity);
+        Instantiate(attack, attackPos, Quaternion.identity);
     }
 
 }

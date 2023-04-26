@@ -25,7 +25,7 @@ public class DamageInRadius : MonoBehaviour
         {
             if (coll.gameObject.CompareTag("Player"))
             {
-                coll.GetComponent<PlayerHealth>().Damage(damage);
+                coll.GetComponent<PlayerHealth>().OnTakeDamage(damage);
             }
         }
         float distanceToPlayer = (PlayerPosition.Value - transform.position).magnitude;

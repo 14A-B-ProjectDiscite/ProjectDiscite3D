@@ -19,6 +19,8 @@ public class ProgressBar : MonoBehaviour
     [SerializeField]
     private UnityEvent OnCompleted;
 
+    public Image[] images;
+
     private Coroutine AnimationCoroutine;
 
     private void Start()
@@ -30,6 +32,13 @@ public class ProgressBar : MonoBehaviour
 #if UNITY_EDITOR
             EditorGUIUtility.PingObject(this.gameObject);
 #endif
+        }
+    }
+
+    public void DisableImages(){
+        foreach (var image in images)
+        {
+            image.enabled = false;
         }
     }
 

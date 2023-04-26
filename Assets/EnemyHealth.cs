@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
+    Buoyancy buyoScript;
+    [SerializeField]
     Animator anim;
     [SerializeField]
     private float Health = 100;
@@ -15,16 +17,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private ProgressBar HealthBar;
     public GameObject DeathEffect;
     public float experienceOrbCount;
-    public GameObject ExperienceOrb; 
+    public GameObject ExperienceOrb;
+    public Transform bodyTransform;
+    [SerializeField] SkinnedMeshRenderer renderer;
 
-    private NavMeshAgent Agent;
     private float MaxHealth;
 
     bool dead;
     private void Awake()
     {
         MaxHealth = Health;
-        Agent = GetComponent<NavMeshAgent>();
     }
 
     public void OnTakeDamage(float Damage)
@@ -39,7 +41,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (Health <= 0 && !dead)
         {
             OnDied();
-            Agent.enabled = false;
         }
     }
 
@@ -52,13 +53,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             GameObject go = Instantiate(ExperienceOrb, transform.position, Quaternion.identity);
             go.GetComponent<HomingMissile>()._speed = speed;
         }
+        buyoScript.enabled = false;
 
-        anim.SetTrigger("Die");
-        Instantiate(DeathEffect, transform.position, Quaternion.identity);
-        Destroy(DeathEffect, 3f);
-        Destroy(HealthBar.gameObject, 3.1f);
-        Destroy(gameObject, 4f);
-        
+        //anim.SetTrigger("Die");
+        GameObject deathGO = Instantiate(DeathEffect, bodyTransform.position, Quaternion.identity, bodyTransform);
+        renderer.enabled = false;
+        Destroy(deathGO, 2f);
+        Destroy(gameObject, 2f);
+        HealthBar.DisableImages();
+
     }
 
     public void SetupHealthBar(Canvas Canvas, Camera Camera)
