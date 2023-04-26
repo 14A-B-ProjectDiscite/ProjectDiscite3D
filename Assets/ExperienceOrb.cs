@@ -9,6 +9,9 @@ public class ExperienceOrb : MonoBehaviour
     public GameObject BuffEffect;
     [SerializeField]
     FloatVariable Score;
+    [SerializeField]
+    FloatVariable Essence;
+    public float EssenceValue;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +22,7 @@ public class ExperienceOrb : MonoBehaviour
             Instantiate(BuffEffect, transform.position, Quaternion.Euler(90, 0, 0));
             Score.Value += score;
             Destroy(gameObject);
+            Essence.Value += Random.Range(EssenceValue * .75f, EssenceValue * 1.5f);
         }
     } 
 }

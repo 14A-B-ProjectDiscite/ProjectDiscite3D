@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -7,6 +10,8 @@ using UnityEngine.UIElements;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
+    [SerializeField]
+    GameObjectRuntimeSet Monsters;
     [SerializeField]
     Buoyancy buyoScript;
     [SerializeField]
@@ -19,8 +24,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public float experienceOrbCount;
     public GameObject ExperienceOrb;
     public Transform bodyTransform;
-    [SerializeField] SkinnedMeshRenderer renderer;
-
+    [SerializeField] SkinnedMeshRenderer meshRenderer;
+    public GameObject damageText;
     private float MaxHealth;
 
     bool dead;
@@ -35,6 +40,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         /*anim.SetTrigger("Spell Cast");
         anim.SetTrigger("Spit Poison Attack");
         anim.SetTrigger("Take Damage");*/
+        GameObject damageT = Instantiate(damageText, bodyTransform.position, Quaternion.identity);
+        damageT.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(String.Format("{0:0,0}", Damage));
         Health -= Damage;
         HealthBar.SetProgress(Health / MaxHealth, 3);
 
@@ -49,15 +56,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         dead = true;
         for (int i = 0; i < experienceOrbCount; i++)
         {
-            float speed = Random.Range(5, 15);
+            float speed = UnityEngine.Random.Range(5, 15);
             GameObject go = Instantiate(ExperienceOrb, transform.position, Quaternion.identity);
             go.GetComponent<HomingMissile>()._speed = speed;
         }
+        Monsters.Items.Remove(gameObject);
         buyoScript.enabled = false;
 
         //anim.SetTrigger("Die");
         GameObject deathGO = Instantiate(DeathEffect, bodyTransform.position, Quaternion.identity, bodyTransform);
-        renderer.enabled = false;
+        meshRenderer.enabled = false;
         Destroy(deathGO, 2f);
         Destroy(gameObject, 2f);
         HealthBar.DisableImages();

@@ -50,9 +50,13 @@ namespace PolygonArsenal
                         rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
 
                     }
-                    IDamageable damageable = col.transform.root.GetComponent<IDamageable>();
-                    if (damageable != null)
-                        damageable.OnTakeDamage(damage);
+                    if (!col.CompareTag("Player"))
+                    {
+                        IDamageable damageable = col.transform.root.GetComponent<IDamageable>();
+                        if (damageable != null)
+                            damageable.OnTakeDamage(damage);
+                    }
+                    
                 }
             }
             Destroy(impactParticle, 5f);

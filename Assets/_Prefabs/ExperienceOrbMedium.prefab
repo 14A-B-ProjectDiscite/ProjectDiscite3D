@@ -4952,7 +4952,7 @@ GameObject:
   - component: {fileID: 450447651611539099}
   - component: {fileID: 450447651611539098}
   m_Layer: 0
-  m_Name: ExperienceOrb
+  m_Name: ExperienceOrbMedium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9905,6 +9905,8 @@ MonoBehaviour:
   BuffEffect: {fileID: 9121824407674514580, guid: 28fd397a32d864844b568a48a64949fb,
     type: 3}
   Score: {fileID: 11400000, guid: 152efe78b8baa8b41a2dc9d8bc21394a, type: 2}
+  Essence: {fileID: 11400000, guid: ab794a373df679d498397b7c4b4d91a6, type: 2}
+  EssenceValue: 10000
 --- !u!1 &451854457878354583
 GameObject:
   m_ObjectHideFlags: 0

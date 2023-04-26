@@ -15,15 +15,25 @@ public class GunSystem : MonoBehaviour
     [Header("Gun Type")]
     public GunType gunType;
     [Header("Gun stats")]
+    [SerializeField]
+    FloatVariable AttackSpeedModifier;
+    [SerializeField]
+    FloatVariable DamageModifier;
+    [SerializeField]
+    FloatVariable BulletsPerTapModifier;
+    [SerializeField]
+    BoolVariable AllowHoldingDown;
+    [Header("RayCastSettings")]
+    public int damage;
+    [Header("Projectile Settings")]
     //Gun stats
     public GameObject Projectile;
     public float projectileForce;
-    public int damage;
+    [Header("Universal Settings")]
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int bulletsPerTap;
     public bool allowButtonHold;
     int bulletsShot;
-    public float BulletSpeed;
     [SerializeField]
     private LineRenderer BulletTrail;
 
@@ -31,10 +41,6 @@ public class GunSystem : MonoBehaviour
     //Recoil
     public Transform recoilMod;
     public GameObject weapon;
-    public float maxRecoil_x = -20f;
-    public float recoilSpeed = 10f;
-    public float recoilRecoverySmoothing;
-    private float recoil = 0f;
     public SpreadConfig spreadConfig;
 
 
@@ -45,6 +51,7 @@ public class GunSystem : MonoBehaviour
 
     //Reference
     [Header("Reference")]
+    public Rigidbody playerRb;
     public Camera fpsCam;
     public Transform attackPoint;
     public RaycastHit rayHit;
@@ -54,8 +61,8 @@ public class GunSystem : MonoBehaviour
     //Graphics
     [Header("Graphics")]
     public GameObject muzzleFlash, bulletHoleGraphic;
+    [Header("Camera Shake")]
     public float camShakeMagnitude, camShakeFadeIn, camShakeFadeOut, camShakeRoughness;
-    public Text text;
     private void Start()
     {
         defRecoilModRot = recoilMod.rotation;
@@ -89,13 +96,13 @@ public class GunSystem : MonoBehaviour
 
     private void MyInput()
     {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        if (allowButtonHold || AllowHoldingDown.Value) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         //Shoot
         if (readyToShoot && shooting && !reloading)
         {
-            bulletsShot = bulletsPerTap;
+            bulletsShot = bulletsPerTap + Mathf.RoundToInt(BulletsPerTapModifier.Value) ;
             Shoot();
         }
     }
@@ -114,16 +121,18 @@ public class GunSystem : MonoBehaviour
             //RayCast
             if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsHittable))
             {
-                Debug.Log(rayHit.collider.name);
                 IHittable hittable = rayHit.collider.transform.root.GetComponent<IHittable>();
                 if (hittable != null)
                 {
                     hittable.Hit(rayHit.point, rayHit.normal);
                 }
-
-                IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
-                if (damageable != null)
-                    damageable.OnTakeDamage(damage);
+                if (!rayHit.collider.CompareTag("Player"))
+                {
+                    IDamageable damageable = rayHit.collider.transform.root.GetComponent<IDamageable>();
+                    if (damageable != null)
+                        damageable.OnTakeDamage(damage * DamageModifier.Value);
+                }
+                
 
                 //LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, attackPoint.rotation, attackPoint);
                 //float dist = Vector3.Distance(attackPoint.position, rayHit.point);
@@ -141,7 +150,11 @@ public class GunSystem : MonoBehaviour
         else if (gunType == GunType.Projectile)
         {
             GameObject projectileGO = Instantiate(Projectile, attackPoint.position, attackPoint.rotation);
-            projectileGO.GetComponent<Rigidbody>().AddForce(attackPoint.forward * -projectileForce);
+            Rigidbody rb = projectileGO.GetComponent<Rigidbody>();
+            rb.velocity = playerRb.velocity; 
+            rb.AddForce(attackPoint.forward * -projectileForce);
+
+
         }
 
 
@@ -153,7 +166,7 @@ public class GunSystem : MonoBehaviour
         Instantiate(muzzleFlash, attackPoint.position, attackPoint.rotation, attackPoint);
         bulletsShot--;
         RecoilOnce();
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke("ResetShot", timeBetweenShooting * Mathf.Max(0.3f,  AttackSpeedModifier.Value));
 
         if (bulletsShot > 0)
             Invoke("Shoot", timeBetweenShots);

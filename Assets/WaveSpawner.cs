@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
+    [SerializeField]
+    GameObjectRuntimeSet Monsters;
+
     public Wave[] waves;
 
     public Transform[] spawnPoints;
@@ -15,118 +19,70 @@ public class WaveSpawner : MonoBehaviour
 
     private Wave currentWave;
 
-    private int currentWaveNumber;
+    private int currentWaveIndex = -1;
 
-    private float nextSpawnTime;
+    private bool gameEnded;
 
-    private bool canSpawn = true;
-
-    private bool canAnimate = false;
-
-
-
+    public float SpawnDelay;
     private void Update()
 
     {
-
-        currentWave = waves[currentWaveNumber];
-
-        SpawnWave();
-
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        if (totalEnemies.Length == 0)
-
+        if (Monsters.Items.Count == 0)
         {
-
-            if (currentWaveNumber + 1 != waves.Length)
-
-            {
-
-                if (canAnimate)
-
-                {
-
-                    waveName.text = waves[currentWaveNumber + 1].waveName;
-
-                    animator.SetTrigger("NewWave");
-
-                    canAnimate = false;
-
-                }
-
-
-
-            }
-
-            else
-
-            {
-
-                Debug.Log("GameFinish");
-
-            }
-
+            WaveComplete();
         }
-
-
-
     }
 
-    void SpawnNextWave()
+    void WaveComplete()
 
     {
+        if (gameEnded) { return ; }
+        currentWaveIndex++;
+        Debug.Log("Wave Complete. Wave " + (currentWaveIndex + 1) + " is beginning");
+        if (currentWaveIndex != waves.Length)
+        {
+            currentWave = waves[currentWaveIndex];
+            SpawnWave();
 
-        currentWaveNumber++;
 
-        canSpawn = true;
+            waveName.text = currentWave.waveName;
 
+            animator.SetTrigger("NewWave");
+
+        }
+        else
+        {
+            waveName.text = "Game Complete! Congratulations!";
+            animator.SetTrigger("NewWave");
+            gameEnded = true;
+        }
     }
 
     void SpawnWave()
 
     {
-
-        if (canSpawn && nextSpawnTime < Time.time)
-
+        for (int i = 0; i < currentWave.numberOfEnemies; i++)
         {
-
-            GameObject randomEnemy = currentWave.typeOfEnemies[Random.Range(0, currentWave.typeOfEnemies.Length)];
+            GameObject randomEnemy = currentWave.enemyTypes[Random.Range(0, currentWave.enemyTypes.Length)];
 
             Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-            Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
+            GameObject enemy = Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
 
-            currentWave.noOfEnemies--;
-
-            nextSpawnTime = Time.time + currentWave.spawnInterval;
-
-            if (currentWave.noOfEnemies == 0)
-
-            {
-
-                canSpawn = false;
-
-                canAnimate = true;
-
-            }
-
+            Monsters.Items.Add((GameObject)enemy);
         }
-
-
-
+        }
     }
-}
+
 [System.Serializable]
 public class Wave
 
 {
-
     public string waveName;
 
-    public int noOfEnemies;
+    public int numberOfEnemies;
 
-    public GameObject[] typeOfEnemies;
+    public GameObject[] enemyTypes;
 
     public float spawnInterval;
 

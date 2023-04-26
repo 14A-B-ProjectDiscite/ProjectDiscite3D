@@ -4955,11 +4955,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  explosionRange: 10
-  explosionForce: -3000
+  explosionRange: 3
+  explosionForce: 5000
   impactParticle: {fileID: 1748515389361954, guid: 938a6f4810753fc46ac6d8235f82afaa,
     type: 3}
-  damage: 30
+  damage: 100
   HitLayer:
     serializedVersion: 2
     m_Bits: 2147483647
