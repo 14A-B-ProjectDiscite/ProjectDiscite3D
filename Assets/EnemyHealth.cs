@@ -1,12 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -36,7 +31,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void OnTakeDamage(float Damage)
     {
-        anim.SetTrigger("Take Damage");
+        anim.SetTrigger("TakeDamage");
         /*anim.SetTrigger("Spell Cast");
         anim.SetTrigger("Spit Poison Attack");
         anim.SetTrigger("Take Damage");*/
