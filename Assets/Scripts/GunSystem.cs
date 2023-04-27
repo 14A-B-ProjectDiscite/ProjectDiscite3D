@@ -22,7 +22,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField]
     FloatVariable BulletsPerTapModifier;
     [SerializeField]
-    BoolVariable AllowHoldingDown;
+    FloatVariable LaunchForceModifier;
     [Header("RayCastSettings")]
     public int damage;
     [Header("Projectile Settings")]
@@ -96,7 +96,7 @@ public class GunSystem : MonoBehaviour
 
     private void MyInput()
     {
-        if (allowButtonHold || AllowHoldingDown.Value) shooting = Input.GetKey(KeyCode.Mouse0);
+        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         //Shoot
@@ -132,27 +132,15 @@ public class GunSystem : MonoBehaviour
                     if (damageable != null)
                         damageable.OnTakeDamage(damage * DamageModifier.Value);
                 }
-                
+            }
 
-                //LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, attackPoint.rotation, attackPoint);
-                //float dist = Vector3.Distance(attackPoint.position, rayHit.point);
-                //trail.SetPosition(1, new Vector3(0,0, dist));
-                //Destroy(trail, 0.05f);
-            }
-            else
-            {
-                //LineRenderer trail = Instantiate(BulletTrail, attackPoint.position, Quaternion.identity, attackPoint);
-                //trail.SetPosition(0, attackPoint.position);
-                //trail.SetPosition(1, attackPoint.position + attackPoint.forward * -100);
-                //Destroy(trail, 1);
-            }
         }
         else if (gunType == GunType.Projectile)
         {
             GameObject projectileGO = Instantiate(Projectile, attackPoint.position, attackPoint.rotation);
             Rigidbody rb = projectileGO.GetComponent<Rigidbody>();
             rb.velocity = playerRb.velocity; 
-            rb.AddForce(attackPoint.forward * -projectileForce);
+            rb.AddForce(attackPoint.forward * -projectileForce * LaunchForceModifier.Value);
 
 
         }

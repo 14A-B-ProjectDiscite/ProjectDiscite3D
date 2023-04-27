@@ -4962,7 +4962,7 @@ MonoBehaviour:
   explosionForce: 5000
   impactParticle: {fileID: 1748515389361954, guid: 938a6f4810753fc46ac6d8235f82afaa,
     type: 3}
-  damage: 100
+  damage: 220
   HitLayer:
     serializedVersion: 2
     m_Bits: 2147483647

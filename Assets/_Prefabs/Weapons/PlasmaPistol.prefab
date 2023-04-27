@@ -138,11 +138,12 @@ MonoBehaviour:
   DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
   BulletsPerTapModifier: {fileID: 11400000, guid: 3b88b2a85741a4647ba8d4166f523759,
     type: 2}
-  AllowHoldingDown: {fileID: 11400000, guid: ac83553b0e3ea384890dc26b05adaf6e, type: 2}
+  LaunchForceModifier: {fileID: 11400000, guid: 0d946ecd59feb3b4c9639b58d0fa6e40,
+    type: 2}
   damage: 10
   Projectile: {fileID: 9080773511544183516, guid: fac2e570494d05f44a46e51eeb704515,
     type: 3}
-  projectileForce: 1000
+  projectileForce: 2000
   timeBetweenShooting: 1
   spread: 0.001
   range: 100

@@ -81,12 +81,12 @@ PrefabInstance:
         type: 3}
       propertyPath: attack
       value: 
-      objectReference: {fileID: 8579220206671545821, guid: d96703661e8e63248950fb4f5cd2a0e1,
+      objectReference: {fileID: 2892917013502901260, guid: 70d2013c2082b294a831a21c7befe1b6,
         type: 3}
     - target: {fileID: 8579220206671545794, guid: d96703661e8e63248950fb4f5cd2a0e1,
         type: 3}
       propertyPath: attackSpeed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8579220206671545821, guid: d96703661e8e63248950fb4f5cd2a0e1,
         type: 3}
@@ -121,7 +121,7 @@ PrefabInstance:
     - target: {fileID: 8892881770584321035, guid: d96703661e8e63248950fb4f5cd2a0e1,
         type: 3}
       propertyPath: Health
-      value: 10000
+      value: 7000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d96703661e8e63248950fb4f5cd2a0e1, type: 3}

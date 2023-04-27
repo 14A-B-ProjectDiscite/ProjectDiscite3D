@@ -216,7 +216,8 @@ MonoBehaviour:
   DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
   BulletsPerTapModifier: {fileID: 11400000, guid: 3b88b2a85741a4647ba8d4166f523759,
     type: 2}
-  AllowHoldingDown: {fileID: 11400000, guid: ac83553b0e3ea384890dc26b05adaf6e, type: 2}
+  LaunchForceModifier: {fileID: 11400000, guid: 0d946ecd59feb3b4c9639b58d0fa6e40,
+    type: 2}
   damage: 7
   Projectile: {fileID: 8607940300620374814, guid: 48881556fd2760544a675b530c1d9df8,
     type: 3}

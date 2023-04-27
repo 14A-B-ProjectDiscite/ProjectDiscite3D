@@ -12,6 +12,10 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision hit)
     {
+        if (hit.transform.CompareTag("Player"))
+        {
+            return;
+        }
         if (!hasCollided)
         {
             hasCollided = true;
