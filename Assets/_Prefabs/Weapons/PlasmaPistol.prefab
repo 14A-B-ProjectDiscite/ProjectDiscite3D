@@ -133,10 +133,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 1
+  AttackSpeedModifier: {fileID: 11400000, guid: b652bf97886a7c94188c9527e37d5908,
+    type: 2}
+  DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
+  BulletsPerTapModifier: {fileID: 11400000, guid: 3b88b2a85741a4647ba8d4166f523759,
+    type: 2}
+  AllowHoldingDown: {fileID: 11400000, guid: ac83553b0e3ea384890dc26b05adaf6e, type: 2}
+  damage: 10
   Projectile: {fileID: 9080773511544183516, guid: fac2e570494d05f44a46e51eeb704515,
     type: 3}
   projectileForce: 1000
-  damage: 10
   timeBetweenShooting: 1
   spread: 0.001
   range: 100
@@ -144,14 +150,11 @@ MonoBehaviour:
   timeBetweenShots: 0.1
   bulletsPerTap: 1
   allowButtonHold: 0
-  BulletSpeed: 0
   BulletTrail: {fileID: 0}
   recoilMod: {fileID: 0}
   weapon: {fileID: 2331155746151492004}
-  maxRecoil_x: -20
-  recoilSpeed: 1
-  recoilRecoverySmoothing: 1
   spreadConfig: {fileID: 11400000, guid: fa8d7a056f5836648aae3a3155fa80f2, type: 2}
+  playerRb: {fileID: 0}
   fpsCam: {fileID: 0}
   attackPoint: {fileID: 3213463594809753741}
   whatIsHittable:
@@ -164,7 +167,6 @@ MonoBehaviour:
   camShakeFadeIn: 0.01
   camShakeFadeOut: 0.1
   camShakeRoughness: 1
-  text: {fileID: 0}
 --- !u!114 &3213463595047539953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +212,7 @@ MonoBehaviour:
   pickUpRange: 4
   dropForwardForce: 7
   dropUpwardForce: 7
-  equipped: 1
+  equipped: 0
 --- !u!1 &3213463594809753742
 GameObject:
   m_ObjectHideFlags: 0

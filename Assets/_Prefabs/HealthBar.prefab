@@ -134,8 +134,8 @@ MonoBehaviour:
   DefaultSpeed: 1
   ColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.078233, g: 1, b: 0, a: 1}
+    key0: {r: 0, g: 1, b: 0.11084962, a: 1}
+    key1: {r: 1, g: 0.029372733, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65342
+    ctime1: 64957
     ctime2: 0
     ctime3: 0
     ctime4: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   OnCompleted:
     m_PersistentCalls:
       m_Calls: []
+  images: []
 --- !u!222 &5146453758913980364
 CanvasRenderer:
   m_ObjectHideFlags: 0

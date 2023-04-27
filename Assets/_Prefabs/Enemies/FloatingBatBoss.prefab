@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9191942512277300680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0420747
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9871826
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.413126
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545792, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545794, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 8579220206671545821, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+    - target: {fileID: 8579220206671545794, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: attackSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545821, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_Name
+      value: FloatingBatBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545822, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: m_Mass
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545823, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: AirDrag
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545823, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: WaterHeight
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545823, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: FloatingPower
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579220206671545823, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: UnderWaterDrag
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892881770584321035, guid: d96703661e8e63248950fb4f5cd2a0e1,
+        type: 3}
+      propertyPath: Health
+      value: 10000
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d96703661e8e63248950fb4f5cd2a0e1, type: 3}

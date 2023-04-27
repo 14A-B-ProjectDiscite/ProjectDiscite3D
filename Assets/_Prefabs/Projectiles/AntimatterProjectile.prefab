@@ -29502,6 +29502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e4b117ba94e1c4d80f89710058009f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
   impactParticle: {fileID: 1767842681629282, guid: ae14b44785a276b4ca60cab0d2cb2561,
     type: 3}
   damage: 40

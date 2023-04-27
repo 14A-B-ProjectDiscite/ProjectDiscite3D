@@ -6,6 +6,13 @@ namespace PolygonArsenal
 {
     public class PolygonProjectileScript : MonoBehaviour
     {
+        [SerializeField]
+        FloatVariable ExplosionRadius;
+        [SerializeField]
+        FloatVariable ExplosionForce;
+        [SerializeField]
+        FloatVariable DamageModifier;
+
         public ProjectileType type;
         public float explosionRange;
         public float explosionForce;
@@ -34,11 +41,11 @@ namespace PolygonArsenal
 
                 IDamageable damageable = hit.collider.transform.root.GetComponent<IDamageable>();
                 if (damageable != null)
-                    damageable.OnTakeDamage(damage);
+                    damageable.OnTakeDamage(damage * DamageModifier.Value);
             }
             else if (type == ProjectileType.Explosive)
             {
-                Collider[] Hits = Physics.OverlapSphere(transform.position, explosionRange, HitLayer);
+                Collider[] Hits = Physics.OverlapSphere(transform.position, explosionRange * ExplosionRadius.Value, HitLayer);
 
                 foreach (Collider col in Hits)
                 {
@@ -47,14 +54,14 @@ namespace PolygonArsenal
                     {
                         float distance = Vector3.Distance(transform.position, col.transform.position);
 
-                        rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
+                        rb.AddExplosionForce(explosionForce * ExplosionForce.Value, transform.position, explosionRange);
 
                     }
                     if (!col.CompareTag("Player"))
                     {
                         IDamageable damageable = col.transform.root.GetComponent<IDamageable>();
                         if (damageable != null)
-                            damageable.OnTakeDamage(damage);
+                            damageable.OnTakeDamage(damage * DamageModifier.Value);
                     }
                     
                 }

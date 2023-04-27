@@ -4954,6 +4954,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c736e84d8f869d245b3d1dba36061db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionRadius: {fileID: 11400000, guid: 1274f0e77db07324c84f878228eea7ba, type: 2}
+  ExplosionForce: {fileID: 11400000, guid: 81d6044a9bb95f648a336a9ef89d3dd5, type: 2}
+  DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
   type: 1
   explosionRange: 3
   explosionForce: 5000

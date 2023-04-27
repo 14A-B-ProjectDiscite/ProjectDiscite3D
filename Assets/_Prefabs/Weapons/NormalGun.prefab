@@ -61,7 +61,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9134832422364481427}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.1, y: 2.515, z: 11.7}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
@@ -211,10 +211,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
+  AttackSpeedModifier: {fileID: 11400000, guid: b652bf97886a7c94188c9527e37d5908,
+    type: 2}
+  DamageModifier: {fileID: 11400000, guid: 486b671b705055947a1c4786a529bdce, type: 2}
+  BulletsPerTapModifier: {fileID: 11400000, guid: 3b88b2a85741a4647ba8d4166f523759,
+    type: 2}
+  AllowHoldingDown: {fileID: 11400000, guid: ac83553b0e3ea384890dc26b05adaf6e, type: 2}
+  damage: 7
   Projectile: {fileID: 8607940300620374814, guid: 48881556fd2760544a675b530c1d9df8,
     type: 3}
   projectileForce: 2000
-  damage: 7
   timeBetweenShooting: 0.1
   spread: 0.001
   range: 100
@@ -222,15 +228,12 @@ MonoBehaviour:
   timeBetweenShots: 10
   bulletsPerTap: 1
   allowButtonHold: 1
-  BulletSpeed: 1000
   BulletTrail: {fileID: 4054449276771470060, guid: 8791e0c2158328348b882b2c53c2df68,
     type: 3}
   recoilMod: {fileID: 0}
   weapon: {fileID: 9134832422364481427}
-  maxRecoil_x: -20
-  recoilSpeed: 1
-  recoilRecoverySmoothing: 1
   spreadConfig: {fileID: 11400000, guid: 5ee1d1982634da943bab202fe9b57c68, type: 2}
+  playerRb: {fileID: 0}
   fpsCam: {fileID: 0}
   attackPoint: {fileID: 8215718425683029123}
   whatIsHittable:
@@ -244,4 +247,3 @@ MonoBehaviour:
   camShakeFadeIn: 0.01
   camShakeFadeOut: 0.1
   camShakeRoughness: 1
-  text: {fileID: 0}

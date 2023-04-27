@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class WeaponChest : MonoBehaviour, IInteractable
 {
     [Header("Weapon Chest")]
+    public string InteractableName;
     [SerializeField]
     FloatVariable Essence;
     public float price;
@@ -22,6 +23,8 @@ public class WeaponChest : MonoBehaviour, IInteractable
     public Transform recoilMod;
     public Transform gunContainer;
 
+    public string Name { get { return InteractableName; } set { InteractableName = value; } }
+
     private void Start()
     {
         playerRb = Player.GetComponent<Rigidbody>();
@@ -36,7 +39,7 @@ public class WeaponChest : MonoBehaviour, IInteractable
     {
         if (isBought)
         {
-            return;
+            InteractableName = "Empty";
         }
         outline.enabled = true;
     }
@@ -44,9 +47,6 @@ public class WeaponChest : MonoBehaviour, IInteractable
     {
         outline.enabled = false;
     }
-
-    private Transform highlight;
-    private Transform selection;
 
     void Buy()
     {
@@ -64,12 +64,13 @@ public class WeaponChest : MonoBehaviour, IInteractable
             system.fpsCam = fpsCam;
             system.recoilMod = recoilMod;
             system.playerRb = playerRb;
-            rb.AddForce(Vector3.up * upForce);
+            rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
         }
     }
 }
 public interface IInteractable
 {
+    public string Name { get; set; }
     public void OnInteracted();
     public void OnSelected();
 

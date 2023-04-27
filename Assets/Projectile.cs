@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField]
+    FloatVariable DamageModifier;
     public GameObject impactParticle;
     public float damage;
     private bool hasCollided = false;
@@ -23,7 +25,7 @@ public class Projectile : MonoBehaviour
 
             IDamageable damageable = hit.collider.transform.root.GetComponent<IDamageable>();
             if (damageable != null)
-                damageable.OnTakeDamage(damage);
+                damageable.OnTakeDamage(damage * DamageModifier.Value);
             Destroy(impactParticle, 5f);
             Destroy(gameObject);
 

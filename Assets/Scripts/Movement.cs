@@ -8,6 +8,8 @@ public class Movement : MonoBehaviour
     public static Movement Instance;
     [Header("ScriptableObjects")]
     [SerializeField]
+    FloatVariable MovementSpeedModifier;
+    [SerializeField]
     Vector3Variable PlayerPos;
     [SerializeField]
     Vector3Variable PlayerRBPos;
@@ -184,13 +186,13 @@ public class Movement : MonoBehaviour
 
         if (groundNormal != Vector3.zero)
         {
-            rb.AddForce(Vector3.Cross(look.right, groundNormal) * (vertical * speed * Time.fixedDeltaTime * multi), ForceMode.Impulse);
-            rb.AddForce(Vector3.Cross(look.forward, groundNormal) * (-horizontal * speed * Time.fixedDeltaTime * multi), ForceMode.Impulse);
+            rb.AddForce(Vector3.Cross(look.right, groundNormal) * (vertical * speed * MovementSpeedModifier.Value * Time.fixedDeltaTime * multi), ForceMode.Impulse);
+            rb.AddForce(Vector3.Cross(look.forward, groundNormal) * (-horizontal * speed * MovementSpeedModifier.Value * Time.fixedDeltaTime * multi), ForceMode.Impulse);
         }
         else
         {
-            rb.AddForce(look.forward * (vertical * speed * Time.fixedDeltaTime * multi), ForceMode.Impulse);
-            rb.AddForce(look.right * (horizontal * speed * Time.fixedDeltaTime * multi), ForceMode.Impulse);
+            rb.AddForce(look.forward * (vertical * speed * MovementSpeedModifier.Value * Time.fixedDeltaTime * multi), ForceMode.Impulse);
+            rb.AddForce(look.right * (horizontal * speed * MovementSpeedModifier.Value * Time.fixedDeltaTime * multi), ForceMode.Impulse);
         }
     }
 
