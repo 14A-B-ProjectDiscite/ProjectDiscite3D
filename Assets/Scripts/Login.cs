@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -13,47 +17,54 @@ public class Login : MonoBehaviour
     [SerializeField] InputField password;
     [SerializeField] StringVariable token;
     [SerializeField] IntVariable userID;
-    [SerializeField] SaveDataSource dataSource;
+    [SerializeField] StringVariable username;
 
-   public void LoginButtonClicked()
+
+    public void LoginButtonClicked()
     {
-        StartCoroutine(TryLogin(email.text, password.text));
+        TryLogin(email.text, password.text);
+        //StartCoroutine(TryLogin(email.text, password.text));
         // asd@fgh.jkl
         // asdfghjkl
     }
-
-    public IEnumerator TryLogin(string email, string password)
+    public void GetConfig()
     {
-        //@TODO: call API login
-        // Store Token
-        // Add Token to headers
-
-        var user = new UserData();
-        user.email = email;
-        user.password = password;
-
-        string json = JsonUtility.ToJson(user);
-
-        var req = new UnityWebRequest("https://nagyilles.jedlik.cloud/api/api/users/login", "POST");
-        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
-        req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
-        req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        req.SetRequestHeader("Content-Type", "application/json");
-
-        //Send the request then wait here until it returns
-        yield return req.SendWebRequest();
-
-        if (req.isNetworkError)
+        using (var client = new HttpClient())
         {
-            Debug.Log("Error While Sending: " + req.error);
+
+            var endpoint = new Uri("https://discite.jedlik.cloud/api/api/config");
+            var result = client.GetAsync(endpoint).Result;
+            var json = result.Content.ReadAsStringAsync().Result;
+            Debug.Log(json);
         }
-        else
+    }
+    public void GuestButton()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void RegisterButton()
+    {
+        Application.OpenURL("https://discite.jedlik.cloud");
+    }
+    public void TryLogin(string email, string inputtedPassword)
+    {
+        // Solution Number 2
+        using(var client = new HttpClient())
         {
-            Debug.Log("Received: " + req.downloadHandler.text);
-            TokenData data = JsonUtility.FromJson<TokenData>(req.downloadHandler.text);
+
+            var endpoint = new Uri("https://discite.jedlik.cloud/api/api/user/login");
+
+            var newPost = new UserData() { email = email, password = inputtedPassword };
+            var newPostJson = JsonUtility.ToJson(newPost);
+            Debug.Log(newPostJson);
+            var payload = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+            var result = client.PostAsync(endpoint, payload).Result.Content.ReadAsStringAsync().Result;
+            Debug.Log(result);
+            TokenData data = JsonUtility.FromJson<TokenData>(result);
+            userID.Value = int.Parse(data.id);
+            username.Value = data.username;
             token.Value = data.token;
-            userID.Value = data.id;
-            dataSource.Load();
+            SceneManager.LoadScene(1);
         }
 
     }
@@ -67,6 +78,8 @@ public class UserData
 [Serializable]
 public class TokenData
 {
+    public string id;
+    public string username;
+    public string email;
     public string token;
-    public int id;
 }
