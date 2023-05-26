@@ -15,6 +15,7 @@ public class Login : MonoBehaviour
     //[SerializeField] TextMeshProUGUI email;
     [SerializeField] InputField email;
     [SerializeField] InputField password;
+    [SerializeField] Text errorsText;
     [SerializeField] StringVariable token;
     [SerializeField] IntVariable userID;
     [SerializeField] StringVariable username;
@@ -60,6 +61,7 @@ public class Login : MonoBehaviour
             var payload = new StringContent(newPostJson, Encoding.UTF8, "application/json");
             var result = client.PostAsync(endpoint, payload).Result.Content.ReadAsStringAsync().Result;
             Debug.Log(result);
+            errorsText.text = "The email or password was incorrect.";
             TokenData data = JsonUtility.FromJson<TokenData>(result);
             userID.Value = int.Parse(data.id);
             username.Value = data.username;

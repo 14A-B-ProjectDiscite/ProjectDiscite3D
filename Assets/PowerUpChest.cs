@@ -28,7 +28,7 @@ public class PowerUpChest : MonoBehaviour, IInteractable
 
     public void OnSelected()
     {
-        if (isBought)
+        if (isBought && outline)
         {
             InteractableName = "Empty";
         }
@@ -36,6 +36,10 @@ public class PowerUpChest : MonoBehaviour, IInteractable
     }
     public void OnDeselected()
     {
+        if (!outline)
+        {
+            return;
+        }
         outline.enabled = false;
     }
 
@@ -48,6 +52,7 @@ public class PowerUpChest : MonoBehaviour, IInteractable
             GameObject wep = Instantiate(PowerUp, spawnPoint.position, Quaternion.identity);
             GameObject effect = Instantiate(Effect, spawnPoint.position, spawnPoint.rotation);
             Destroy(effect, 2f);
+            Destroy(gameObject);
         }
     }
 }

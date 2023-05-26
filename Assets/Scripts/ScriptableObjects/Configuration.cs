@@ -7,28 +7,29 @@ using System;
 [Serializable]
 public class Configuration
 {
-    public Weapon[] weapons;
-    public Enemy[] enemies;
-    public Class[] classes;
-    public Artifact[] artifacts;
+    public int id;
+    public int userId;
+    public int score;
+    public DateTime startDate;
+    public DateTime endDate;
+    public int wave;
+    public List<Artifact> artifacts;
+    public List<Weapon> weapons;
+    public List<Enemy> enemies;
 }
 [Serializable]
 public class Weapon
 {
-    public int id;
-    public string name;
-    public float damage;
-    public float attackSpeed;
+    public int weaponId;
+    public int picked;
 }
 [Serializable]
 public class Enemy
 {
-    public int id;
-    public string name;
-    public float maxHp;
-    public float damage;
-    public float energy;
-    public float speed;
+    public int enemyId;
+    public int deaths;
+    public int seen;
+    public int damage;
 }
 [Serializable]
 public class Class
@@ -43,7 +44,9 @@ public class Class
 [Serializable]
 public class Artifact
 {
-    public int id;
-    public string name;
-    public int maxLevel;
+    public int artifactId;
+    public int picked;
 }
+
+// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+

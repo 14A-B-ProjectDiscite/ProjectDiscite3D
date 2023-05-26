@@ -11,10 +11,6 @@ public class InteractionSystem : MonoBehaviour
     public IInteractable selected;
     public Text InteractableText;
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +20,6 @@ public class InteractionSystem : MonoBehaviour
             IInteractable interactable = rayHit.collider.transform.root.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                Debug.Log(rayHit.collider.name);
                 selected = interactable;
                 interactable.OnSelected();
                 InteractableText.text = interactable.Name;
@@ -43,6 +38,9 @@ public class InteractionSystem : MonoBehaviour
         {
             selected.OnInteracted();
         }
+        if (selected == null) {
+            InteractableText.text = "";
+        }
     }
-    
+
 }

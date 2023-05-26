@@ -16890,6 +16890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fd2b8893b48e841a2c2786de2a249d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDie: {fileID: 11400000, guid: 8f00590c8e7abe14188d0ca208a8984a, type: 2}
+  onDamaged: {fileID: 11400000, guid: 1b77568be125a484dafa20cbc5b646c1, type: 2}
   currHealth: {fileID: 11400000, guid: 33449bab2db7dfc4cbb69f0482120880, type: 2}
   maxHealth: {fileID: 11400000, guid: b8fb0cefc0784274e9fd5f801025bbd1, type: 2}
   fullscreenShader: {fileID: 2100000, guid: b171632fc7cba6d4ca36fa2778f22b01, type: 2}
@@ -18033,6 +18035,84 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be73b85d8bb808f47bb0a46e41f45db0, type: 3}
+--- !u!1 &753443842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753443844}
+  - component: {fileID: 753443843}
+  - component: {fileID: 753443845}
+  m_Layer: 0
+  m_Name: PostRun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &753443843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753443842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: addd70f33b8f0464388ede5887d8df7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: {fileID: 11400000, guid: d1fe1f1d6fe322046a8e0e76ee562e06, type: 2}
+  runId: {fileID: 11400000, guid: 4f949386e3d1bf6428ee9f137aef444e, type: 2}
+  userId: {fileID: 11400000, guid: 659230f525397c64288e5211aa2c48c6, type: 2}
+  score: {fileID: 11400000, guid: 152efe78b8baa8b41a2dc9d8bc21394a, type: 2}
+  WaveNumber: {fileID: 11400000, guid: f1c14d75648cd2d4fb8289f11117e334, type: 2}
+--- !u!4 &753443844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753443842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 59
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &753443845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753443842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023ee582f8f7852458c7686ab39e458e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8f00590c8e7abe14188d0ca208a8984a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 753443843}
+        m_TargetAssemblyTypeName: PostRun, Assembly-CSharp
+        m_MethodName: EndRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &754057098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1484873974708226, guid: 0f9577b4dda6cc546abea4737be5a392,
@@ -22946,6 +23026,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 49772900}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1182216554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182216547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023ee582f8f7852458c7686ab39e458e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1b77568be125a484dafa20cbc5b646c1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1182216549}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1186765696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8470885090953649449, guid: cdf9e8223922bc04ba058b9d8ac6f63a,
@@ -23282,6 +23390,7 @@ MonoBehaviour:
   - {fileID: 1045500069}
   animator: {fileID: 1036398029}
   waveName: {fileID: 1036398027}
+  WaveNumber: {fileID: 11400000, guid: f1c14d75648cd2d4fb8289f11117e334, type: 2}
   SpawnDelay: 3
 --- !u!4 &1236031249
 Transform:

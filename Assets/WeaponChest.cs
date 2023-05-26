@@ -37,7 +37,7 @@ public class WeaponChest : MonoBehaviour, IInteractable
 
     public void OnSelected()
     {
-        if (isBought)
+        if (isBought && outline)
         {
             InteractableName = "Empty";
         }
@@ -45,6 +45,10 @@ public class WeaponChest : MonoBehaviour, IInteractable
     }
     public void OnDeselected()
     {
+        if (!outline)
+        {
+            return;
+        }
         outline.enabled = false;
     }
 
@@ -65,6 +69,7 @@ public class WeaponChest : MonoBehaviour, IInteractable
             system.recoilMod = recoilMod;
             system.playerRb = playerRb;
             rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
+            Destroy(gameObject);
         }
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    [SerializeField] GameEvent onDie;
+    [SerializeField] GameEvent onDamaged;
     [SerializeField] FloatVariable currHealth;
     [SerializeField] FloatVariable maxHealth;
     public Material fullscreenShader;
@@ -29,12 +31,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        onDie.Raise();
         Debug.Log("Dead");
         SceneManager.LoadScene("DeadScene");
     }
 
     public void OnTakeDamage(float Damage)
     {
+        onDamaged.Raise();
         currHealth.Value -= Damage;
         colorIntensity = maxColorIntensity;
         effectIntensity = maxEffectIntensity;

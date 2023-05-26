@@ -21,6 +21,8 @@ public class WaveSpawner : MonoBehaviour
 
     private int currentWaveIndex = -1;
 
+    [SerializeField] IntVariable WaveNumber;
+
     private bool gameEnded;
 
     public float SpawnDelay;
@@ -38,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if (gameEnded) { return ; }
         currentWaveIndex++;
+        WaveNumber.Value = currentWaveIndex + 1;
         Debug.Log("Wave Complete. Wave " + (currentWaveIndex + 1) + " is beginning");
         if (currentWaveIndex != waves.Length)
         {
